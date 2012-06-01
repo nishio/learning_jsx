@@ -1,9 +1,10 @@
 import "jquery-1.7.jsx";
 class _Main {
-    static function main(args : string[]) : void {
-        var value : string = jQuery.as_func("p").get(0).innerHTML;
-        log value + "---" + value;
-        jQuery.as_func("p").css("background", "red");
-        jQuery.as_func("p").get(1).innerHTML = "piyo";
+    static function click_handler(e:jQueryEvent):void{
+        e.target.innerHTML += "hoge";
+    }
+    static function main() : void {
+        new jQuery("p").css("background", "#afa")
+        .click(_Main.click_handler);
     }
 }
