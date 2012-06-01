@@ -1,5 +1,6 @@
 /** jQuery wrapper for JSX
 by NISHIO Hirokazu
+MIT License
 */
 
 import "js.jsx";
