@@ -1,8 +1,10 @@
 /** jQuery wrapper for JSX
 by NISHIO Hirokazu
+MIT License
 */
 
 import "js.jsx";
+
 //import "js/web.jsx"; // too slow
 native class Element { // come from js/web.jsx
     var innerHTML : string;
@@ -21,9 +23,25 @@ final class jQuery { // wrapper of jQuery object
         this._t = jq(arg1);
     }
 
+    function constructor(){}
+
+    function set_jQuery(jq : jQueryNative): jQuery{
+        this._t = jq;
+        return this;
+    }
+
+    static function wrap(jq : jQueryNative) : jQuery{
+        return new jQuery().set_jQuery(jq);
+    }
+
     function css(a1 : string, a2 : string) : jQuery {
         var t = this._t as __noconvert__ jQueryNative;
-        return t.css(a1, a2);
+        return jQuery.wrap(t.css(a1, a2));
+    }
+
+    function click(handler : function(:jQueryEvent):void) : jQuery {
+        var t = this._t as __noconvert__ jQueryNative;
+        return jQuery.wrap(t.click(handler));
     }
 
     function get(i : number) : Element {
@@ -33,5 +51,10 @@ final class jQuery { // wrapper of jQuery object
 }
 
 native __fake__ class jQueryNative {
-    function css(a1 : string, a2 : string) : jQuery;
+    function css(a1 : string, a2 : string) : jQueryNative;
+    function click(handler : function(:jQueryEvent):void) : jQueryNative;
+}
+
+native __fake__ class jQueryEvent {
+    var target : Element;
 }
