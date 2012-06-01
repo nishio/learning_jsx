@@ -11,15 +11,17 @@ native class Element { // come from js/web.jsx
 }
 
 final class jQuery { // wrapper of jQuery object
-    var _t : variant; // true jQuery object
+    var _t : jQueryNative; // true jQuery object
 
     function constructor(arg1 : variant, arg2 : variant){
-        var jq = js.global["jQuery"] as function(:variant, :variant):jQuery;
+        var jq = js.global["jQuery"]
+        as function(:variant, :variant) : jQueryNative;
         this._t = jq(arg1, arg2);
     }
 
     function constructor(arg1 : variant){
-        var jq = js.global["jQuery"] as function(:variant):jQuery;
+        var jq = js.global["jQuery"]
+        as function(:variant) : jQueryNative;
         this._t = jq(arg1);
     }
 
